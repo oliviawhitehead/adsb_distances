@@ -47,6 +47,40 @@ def numgenerator():
     #print("longitude;", lon, '\n\r') 
     return lat, lon
 
+def print_nicely(my_dict):
+    '''
+    Summary:
+            - Print things out nicely
+    '''
+
+    for entry in my_dict:
+        # NB: Sometimes data contains None for lat/long, make sure to check
+        if (my_dict[entry]['lat'] is not None) and (my_dict[entry]['lon'] is not None):
+            print("New Entry: %s | Latitude %.3f | Longitude %.3f" % (entry, my_dict[entry]['lat'], my_dict[entry]['lon']))
+
+    return None
+
+def TargetDistance(my_dict):
+    '''
+    Summary:
+        -Finds the target distance between each plane and Frimley office (51.315432, -0.745697)
+    Inputs:
+        -Dictionary from ADSB data
+    Outputs:
+        -Distance
+    '''
+    MyDistances = {}
+    OurPosition = (51.315432, -0.745697)
+    for entry in my_dict:
+        # NB: Sometimes data contains None for lat/long, make sure to check
+        if (my_dict[entry]['lat'] is not None) and (my_dict[entry]['lon'] is not None):
+            distance = geodesic(OurPosition, (my_dict[entry]['lat'], my_dict[entry]['lon'])).miles
+            MyDistances[entry] = distance
+            print("Flight %s | Distance: %.4f" % (entry,distance))
+    return None
+
+
+
 def CPA(lat, lon):
     '''
     Summary:
@@ -64,8 +98,8 @@ def CPA(lat, lon):
 
     return None
 
-lat, lon = numgenerator()
-CPA(lat, lon)
+#lat, lon = numgenerator()
+#CPA(lat, lon)
     
 
 

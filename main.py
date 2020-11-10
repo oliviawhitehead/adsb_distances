@@ -1,6 +1,6 @@
 import json
 from kafka import KafkaConsumer
-
+import test
 def main():
 
     consumer = KafkaConsumer('adsb-data', bootstrap_servers=['my-cluster-kafka-bootstrap:9092'], auto_offset_reset='earliest')
@@ -17,7 +17,7 @@ def main():
         '''
         ############## CUSTOM CODE GOES HERE ###################
         '''
-        
+        test.TargetDistance(output_dict)
        
         '''
         ########################################################
