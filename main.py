@@ -2,7 +2,7 @@ import json
 from kafka import KafkaConsumer
 import test
 def main():
-
+    print("starting")
     consumer = KafkaConsumer('adsb-data', bootstrap_servers=['my-cluster-kafka-bootstrap:9092'], auto_offset_reset='earliest')
 
     for message in consumer:
@@ -25,3 +25,5 @@ def main():
 
 
     return None
+
+if __name__ == '__main__' : main()
